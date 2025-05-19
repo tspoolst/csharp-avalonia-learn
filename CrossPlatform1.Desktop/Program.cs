@@ -1,7 +1,7 @@
-﻿using Avalonia;
 using System;
+using Avalonia;
 
-namespace csharp_avalonia_learn;
+namespace CrossPlatform1.Desktop;
 
 sealed class Program
 {

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net9.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrossPlatform1\CrossPlatform1.csproj" />
+  </ItemGroup>
+</Project>

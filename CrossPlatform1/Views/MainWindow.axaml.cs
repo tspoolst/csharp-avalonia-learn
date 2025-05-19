@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace csharp_avalonia_learn.Views;
+namespace CrossPlatform1.Views;
 
 public partial class MainWindow : Window
 {

@@ -1,0 +1,109 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CrossPlatform1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CrossPlatform1.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+  <ScrollViewer>
+    <Border Padding="10">
+      <StackPanel Spacing="10">
+        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- TextBlock -->
+        <TextBlock Text="This is a TextBlock" FontSize="16" />
+
+        <!-- Button -->
+        <Button Content="Click Me" Width="100" />
+
+        <!-- CheckBox -->
+        <CheckBox Content="Check Me" IsChecked="True" />
+
+        <!-- RadioButton -->
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <RadioButton Content="Option 1" GroupName="Group1" IsChecked="True" />
+          <RadioButton Content="Option 2" GroupName="Group1" />
+        </StackPanel>
+
+        <!-- TextBox -->
+        <TextBox Text="Editable Text" Width="200" />
+
+        <!-- PasswordBox -->
+        <!-- <PasswordBox Width="200" /> -->
+
+        <!-- ComboBox -->
+        <ComboBox Width="200">
+          <ComboBoxItem Content="Item 1" />
+          <ComboBoxItem Content="Item 2" />
+          <ComboBoxItem Content="Item 3" />
+        </ComboBox>
+
+        <!-- ListBox -->
+        <ListBox Width="200" Height="100">
+          <ListBoxItem Content="List Item 1" />
+          <ListBoxItem Content="List Item 2" />
+          <ListBoxItem Content="List Item 3" />
+        </ListBox>
+
+        <!-- Slider -->
+        <TextBlock Text="Slider:" />
+        <Slider Minimum="0" Maximum="100" Value="50" Width="200" />
+
+        <!-- ProgressBar -->
+        <TextBlock Text="ProgressBar:" />
+        <ProgressBar Minimum="0" Maximum="100" Value="75" Width="200" />
+
+        <!-- DatePicker -->
+        <TextBlock Text="DatePicker:" />
+        <DatePicker />
+
+        <!-- ToggleSwitch -->
+        <TextBlock Text="ToggleSwitch:" />
+        <ToggleSwitch Content="Toggle Me" IsChecked="True" />
+
+        <!-- TabControl -->
+        <TextBlock Text="TabControl:" />
+        <TabControl>
+          <TabItem Header="Tab 1">
+            <TextBlock Text="Content for Tab 1" />
+          </TabItem>
+          <TabItem Header="Tab 2">
+            <TextBlock Text="Content for Tab 2" />
+          </TabItem>
+        </TabControl>
+
+        <!-- TreeView -->
+        <TextBlock Text="TreeView:" />
+        <TreeView>
+          <TreeViewItem Header="Root 1">
+            <TreeViewItem Header="Child 1" />
+            <TreeViewItem Header="Child 2" />
+          </TreeViewItem>
+          <TreeViewItem Header="Root 2" />
+        </TreeView>
+
+        <!-- DataGrid -->
+        <TextBlock Text="DataGrid:" />
+        <DataGrid Margin="20" ItemsSource="{Binding People}"
+                  IsReadOnly="True"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="False"
+                  GridLinesVisibility="All"
+                  BorderThickness="1" BorderBrush="Gray">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </StackPanel>
+    </Border>
+  </ScrollViewer>
+</UserControl>

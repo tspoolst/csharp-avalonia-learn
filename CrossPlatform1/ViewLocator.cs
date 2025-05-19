@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using csharp_avalonia_learn.ViewModels;
+using CrossPlatform1.ViewModels;
 
-namespace csharp_avalonia_learn;
+namespace CrossPlatform1;
 
 public class ViewLocator : IDataTemplate
 {

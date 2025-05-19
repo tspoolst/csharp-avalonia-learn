@@ -4,10 +4,10 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
-using csharp_avalonia_learn.ViewModels;
-using csharp_avalonia_learn.Views;
+using CrossPlatform1.ViewModels;
+using CrossPlatform1.Views;
 
-namespace csharp_avalonia_learn;
+namespace CrossPlatform1;
 
 public partial class App : Application
 {
@@ -25,7 +25,14 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainViewModel()
+            };
+        }
+        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        {
+            singleViewPlatform.MainView = new MainView
+            {
+                DataContext = new MainViewModel()
             };
         }
 
