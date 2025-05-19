@@ -1,0 +1,100 @@
+sudo apt-get install -y aspnetcore-runtime-6.0
+sudo apt-get install -y aspnetcore-runtime-8.0
+sudo apt-get install -y aspnetcore-runtime-9.0
+
+#fix for mix of dotnet paths (old vs new?)
+ll /usr/share/dotnet/shared/Microsoft.NETCore.App/
+ll /usr/lib/dotnet/shared/Microsoft.AspNetCore.App/
+cd /usr/lib/dotnet/shared/Microsoft.NETCore.App/
+ln -sv /usr/share/dotnet/shared/Microsoft.NETCore.App/9.0.4
+ln -sv /usr/share/dotnet/shared/Microsoft.NETCore.App/8.0.15
+cd /usr/lib/dotnet/shared/Microsoft.AspNetCore.App/
+ln -sv /usr/share/dotnet/shared/Microsoft.AspNetCore.App/9.0.4
+ln -sv /usr/share/dotnet/shared/Microsoft.AspNetCore.App/8.0.15
+
+dotnet --version
+apt install openjdk-17-jdk
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+
+cd ~/Downloads/android/
+utar commandlinetools-linux-13114758_latest.zip
+cd cmdline-tools/
+mkdir latest
+mv * latest/
+..
+mkdir -p ~/Android/Sdk/
+rm -rf ~/Android/Sdk/cmdline-tools
+mv cmdline-tools/ ~/Android/Sdk/
+sdkmanager --list_installed
+
+# maybe?  not sure what version i installed or if i used this package group tag
+apt install mono-complete
+
+
+#to install tools
+sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+
+#setup avalonia.browser build support
+
+#this should already be installed
+sudo dotnet add package Avalonia.Browser --version 11.3.0
+#this is needed to get it working - for net9.0 ?
+sudo dotnet workload install wasm-tools
+#not sure if this is needed - but the docs say to do it if using net8.0
+sudo dotnet workload install wasm-tools-net8
+
+
+#to install avalonia dotnet templates
+sudo dotnet new install Avalonia.Templates
+ or
+sudo dotnet new install Avalonia.Templates::11.3.0
+sudo dotnet workload install android
+
+emulator -list-avds
+emulator -avd Pixel_2 &
+adb devices
+
+dotnet new avalonia.xplat -o CrossPlatform1
+mv CrossPlatform1 csharp-avalonia-learn/
+cd csharp-avalonia-learn/
+rm -rf CrossPlatform1.iOS/
+find . -type f -exec dos2unix {} ;
+find . -type f -exec sed -e 's%11.2.7%11.3.0%g' -i {} ;
+mcedit Directory.Packages.props
+mcedit CrossPlatform1.sln
+for i in CrossPlatform1*;do pushd $i && dotnet new install Avalonia.Templates::11.3.0;popd;done
+#[of]:nuget.config
+nuget.config
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+    <add key="AvaloniaCI" value="https://www.myget.org/F/avalonia-ci/api/v3/index.json" />
+  </packageSources>
+  <packageSourceMapping>
+    <packageSource key="nuget.org">
+      <package pattern="Avalonia.*" />
+      <package pattern="Xamarin.*" />
+      <package pattern="Microsoft.*" />
+      <package pattern="*" />
+    </packageSource>
+    <packageSource key="AvaloniaCI">
+      <package pattern="Avalonia.*" />
+    </packageSource>
+  </packageSourceMapping>
+</configuration>
+#[cf]
+cd CrossPlatform1
+dotnet add package System.Reactive
+
+dotnet build CrossPlatform1.Android/CrossPlatform1.Android.csproj -c Release
+dotnet run --project CrossPlatform1.Android/CrossPlatform1.Android.csproj -c Release
+
+dotnet clean;rm -rvf */{bin,obj,.vs}
+
+
+
