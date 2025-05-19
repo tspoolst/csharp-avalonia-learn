@@ -16,8 +16,12 @@
     <Border Padding="10">
       <StackPanel Spacing="10">
         <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         <!-- TextBlock -->
         <TextBlock Text="This is a TextBlock" FontSize="16" />
+
+        <!-- Label - Size -->
+        <Label x:Name="ScreenSizeLabel" FontSize="20"/>
 
         <!-- Button -->
         <Button Content="Click Me" Width="100" />
