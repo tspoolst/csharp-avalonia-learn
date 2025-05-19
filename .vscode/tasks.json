@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Clean Android Project",
+      "type": "shell",
+      "command": "dotnet clean;rm -rvf */{bin,obj,.vs}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build Android Project",
+      "type": "shell",
+      "command": "dotnet build CrossPlatform1.Android/CrossPlatform1.Android.csproj -c Release",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Android Project",
+      "type": "shell",
+      "command": "dotnet run --project CrossPlatform1.Android/CrossPlatform1.Android.csproj -c Release",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
